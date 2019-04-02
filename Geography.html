@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap-table.min.css"/>
+		<link rel="stylesheet" type="text/css" href="css/demo.css"/>
+		<link rel="stylesheet" type="text/css" href="css/zTreeStyle.css"/>
+		<style type="text/css">
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			html{
+				 overflow-x: hidden;overflow-y: auto;
+				 background: rgba(252, 250, 251, 1);
+			}
+			body{
+				 background: rgba(252, 250, 251, 1);
+				 min-width: 1280px;
+			}
+			#geography{
+				width: 96%;
+				margin: 20px 2% 40px 2%;
+				background: rgba(252, 250, 251, 1);
+			}
+			#geography .geo_left{
+				width: 365px;
+				height: 810px;
+				float: left;
+				position: relative;
+			}
+			#geography .geo_left .geo_left_top{
+				width: 100%;
+				height: 45px;
+				background: rgba(228, 228, 228, 1);
+				position: relative;
+			}
+			.geo_left_top i{
+				display: block;
+				width: 10px;
+				height: 100%;
+				background: url(images/siderbar/u310.png) no-repeat;
+				background-size:100%;
+				position: absolute;
+				top: -1px;
+				left: 0;
+			}
+			.geo_left_top .text{
+				line-height: 45px;
+				margin-left: 20px;
+				font-family: '思源黑体 CN Medium', '思源黑体 CN Regular', '思源黑体 CN';
+			    font-weight: 500;
+			    font-style: normal;
+			    font-size: 16px;
+			}
+			.ztree_box ul.ztree{
+				width: 100%;
+				height: 755px;
+				border: none;
+				background: transparent;
+			}
+			.application{
+				position: absolute;
+				bottom: 50px;
+				left: 50%;
+				margin-left: -27.5px;
+				width: 55px;
+			    height: 32px;
+			    background: rgba(36, 109, 255, 1);
+			    border-radius: 32px;
+			    color: #fff;
+			    cursor: pointer;
+			    outline: none;
+			    border: none;
+			}
+			.modal-header{
+				padding: 10px;
+				position: relative;
+				
+			}
+			.modal-header i{
+				display: block;
+				width: 10px;
+				height: 50px;
+				background: url(images/siderbar/u310.png) no-repeat;
+				background-size: 100%;
+				position: absolute;
+				top: -2px;
+				left: -2px;
+				
+			}
+			.formbox label{
+				width: 90%;
+				margin: 0 auto 15px auto;
+			}
+			label.label_1{
+				padding-top: 30px;
+			}
+			.formbox label span{
+				margin-left:50px ;
+				margin-right:40px ;
+			}
+			.formbox input[type=text],.formbox textarea{
+				width: 300px;
+				font-size: 14px;
+    			text-indent: 5px;
+			}
+			.geo_right{
+				margin-left: 20px;
+				width: calc(100% - 385px);
+				height: 810px;
+				float: right;
+			}
+			.bs-checkbox .th-inner label{
+				width: 15px;
+				margin: 0;
+			}
+			#ArbetTable thead.thead-top tr{
+				border: none;
+				background-color: rgba(228, 228, 228, 1);
+				text-indent: 5px;
+			}
+			#ArbetTable tbody tr {
+			    text-indent: 6px;
+			}
+			a.delete {
+			    color: red;
+			    background-color: transparent;
+			}
+			span.page-list{
+				display: none !important;
+			}
+		</style>
+	</head>
+		<div id="geography">
+			<div class="geo_left clearfix">
+				<div class="geo_left_top">
+					<i></i>
+					<span class="text">地理空间框架</span>
+				</div>
+				<div class="ztree_box">
+					<ul id="ztree" class="ztree"></ul>
+				</div>
+				<div class="but">
+					<button type="button" class="application" data-toggle="modal" data-target="#myModal">申请</button>
+				</div>
+				<div class="app_hide">
+					<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						<div class="modal-dialog" role="document">
+						    <div class="modal-content">
+						      	<div class="modal-header">
+						      		<i></i>
+						        	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						        	<h4 class="modal-title" id="myModalLabel">修改申请</h4>
+						      	</div>
+						      	<div class="modal-body clearfix">
+						      		<form action="#" method="post" class="clearfix formbox">
+						      			<label class="label_1">
+						      				<span >操作类型：</span>
+						      				<input type="text" value=""required="required" placeholder="请选择操作类型" title="内容不能为空"/>
+						      			</label>
+						      			<label>
+						      				<span >位置信息：</span>
+						      				<input type="text" value=""required="required" placeholder="请具体的节点位置信息" title="内容不能为空"/>
+						      			</label>
+						      			<label style="position: relative; height: 100px;" class="clearfix">
+						      				<span style="position: absolute;top: 0;">申请理由：</span>
+						      				<textarea type="text" class="clearfix" value=""required="required" placeholder="请简要描述申请理由" title="内容不能为空"style="height: 100px;position: absolute;right: 42px;"></textarea>
+						      			</label>
+						      			
+						      		</form>
+						      	</div>
+						      	<div class="modal-footer">
+						        	<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+						        	<button type="button" class="btn btn-primary">确认</button>
+						      	</div>
+						    </div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="geo_right clearfix">
+				<table class="table table-striped table-hover" id="ArbetTable">
+			</div>
+		</div>
+	<body>
+		<script src="js/jquery-1.12.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/bootstrap-table.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/locale/bootstrap-table-zh-CN.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery.ztree.core.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery.ztree.excheck.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery.ztree.exedit.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/data.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function(){
+				var setting = {
+						view: {
+						    showIcon: false,  //设置是否显示节点图标
+						},
+						edit: {
+						    //enable: true, //如果enable为flase，那么树就不能移动了
+						    //showRemoveBtn: true, //是否显示树的删除按钮
+						    //showRenameBtn: true, //是否显示数的重命名按钮
+						    //isSimpleData : true, //数据是否采用简单 Array 格式，默认false
+						    //treeNodeKey : "id",  //在isSimpleData格式下，当前节点id属性
+						    //treeNodeParentKey : "parentId",//在isSimpleData格式下，当前节点的父节点id属性
+						    showLine : true, //是否显示节点间的连线
+						    //removeTitle: "删除节点",//删除Logo的提示
+						    //renameTitle: "编辑节点",//修改Logo的提示
+						     //拖拽
+						    drag: {
+							    isCopy: true,//能够复制
+							    isMove: true,//能够移动
+							    prev: false,//不能拖拽到节点前
+							    next: false,//不能拖拽到节点后
+							    inner: true//只能拖拽到节点中
+						    }
+						},
+						check:{
+						    enable: false   //设置是否显示checkbox复选框
+						}
+					};
+					 var zNodes = [
+					   	{name:"全球（中国）", open:true, children:[
+					      	{name:"龙华",open:true, children:[
+							  	{name:"E5",open:true, children:[
+								  	{name:"1.5F",open:true, children:[
+									  	{name:"制程段：ASSY",open:true, children:[
+									  		{name:"线体：S0",open:true, children:[
+									  			{name:"轨道：L1"},
+									  			{name:"轨道：L2"}
+									  		]}
+									  	]}
+								  	]}
+							  	]},
+							  	{name:"E6",open:true, children:[
+								  	{name:"1.5F",open:true, children:[
+									  	{name:"制程段：ASSY",open:true, children:[
+									  		{name:"线体：S0",open:true, children:[
+									  			{name:"轨道：L1"},
+									  			{name:"轨道：L2"}
+									  		]}
+									  	]}
+								  	]}
+							  	]}
+						  	]},
+						    {name:"成都",open:true, children:[
+						    	{name:"E6",open:true, children:[
+								  	{name:"1.5F",open:true, children:[
+									  	{name:"制程段：ASSY",open:false, children:[
+									  		{name:"线体：S0",open:false, children:[
+									  			{name:"轨道：L1"},
+									  			{name:"轨道：L2"}
+									  		]}
+									  	]}
+								  	]}
+							  	]}
+						    ]},
+						    {name:"观澜",open:false, children:[
+						    	{name:"E6",open:true, children:[
+								  	{name:"1.5F",open:true, children:[
+									  	{name:"制程段：ASSY",open:true, children:[
+									  		{name:"线体：S0",open:true, children:[
+									  			{name:"轨道：L1"},
+									  			{name:"轨道：L2"}
+									  		]}
+									  	]}
+								  	]}
+							  	]}
+						    ]}
+						]}    
+					];
+					   $(document).ready(function(){
+					      zTreeObj = $.fn.zTree.init($("#ztree"), setting, zNodes);
+					   });
+			})
+			datas()
+			//table
+			$(function () {
+    			//1.初始化Table
+			    var oTable = new TableInit();
+			    oTable.Init();
+			    //2.初始化Button的点击事件
+			    var oButtonInit = new ButtonInit();
+			    oButtonInit.Init();
+			});
+			var TableInit = function () {
+			    var oTableInit = new Object();
+			    //初始化Table
+			    oTableInit.Init = function () {
+			        $('#ArbetTable').bootstrapTable({
+			            //url: '/Interface/GetData',         //请求后台的URL（*）
+			            //method: 'get',                      //请求方式（*）
+			            toolbar: '#toolbar',                //工具按钮用哪个容器
+			            //striped: true,                      //是否显示行间隔色
+			            cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+			            pagination: true,                   //是否显示分页（*）
+			           	paginationShowPageGo: true,			//跳转
+			            sortable: false,                     //是否启用排序
+			            sortOrder: "asc",                   //排序方式
+			            //queryParams: oTableInit.queryParams,//传递参数（*）
+			            sidePagination: "client",           //分页方式：client客户端分页，server服务端分页（*）
+			            pageNumber: 1,                       //初始化加载第一页，默认第一页
+			           	pageSize: 4,                       //每页的记录行数（*）
+			           // pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
+			            search: true,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+			            //contentType: "application/x-www-form-urlencoded", 
+			            //strictSearch: true,
+			            //showColumns: true,                  //是否显示所有的列 标题的取消
+			           // showRefresh: true,                  //是否显示刷新按钮
+			            minimumCountColumns: 2,             //最少允许的列数
+			            clickToSelect: true, 				//是否启用点击选中行
+			             maintainSelected : false,			//选择翻页也还有
+			            //height: 700,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+			            uniqueId: "no",                     //每一行的唯一标识，一般为主键列
+			           	//showToggle: true,                    //是否显示详细视图和列表视图的切换按钮
+			            //cardView: false,                    //是否显示详细视图
+			            //detailView: false,                   //是否显示父子表
+			            columns: [
+			            {
+			                field: 'checked',				
+			                checkbox: true,								//显示复选框
+			            }, 
+			            {
+			                field: 'ID',
+			                title: '设备名称',
+
+			            }, 
+			            {
+			                field: 'type',
+			                title: '设备类型'
+			            },
+			            {
+			                field: 'Model',
+			                title: '厂商型号'
+			            },
+			            {
+			                field: 'administrator',
+			                title: '管理员'
+			            },{
+			                field: 'status',
+			                title: '设备状态'
+			            },
+			            {
+			                field: 'operate',
+			                title: '操作',
+			            },
+			            ],
+			        });
+
+			    };
+
+			    //得到查询的参数
+			    oTableInit.queryParams = function (params) {
+			        var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+			            limit: params.limit,   //页面大小
+			            offset:params.offset,
+			        };
+			        return temp;
+			    };
+			    return oTableInit;
+			};
+			 
+			$(function(){
+				$thead = $("#ArbetTable thead").addClass("thead-top");
+			})
+			/*function operateFormatter() {//赋予的参数
+			    return [
+			    	'<input type="checkbox" name="sex" value=""/>',
+			    ].join('');
+			}*/
+			var ButtonInit = function () {
+			    var oInit = new Object();
+			    var postdata = {};
+			
+			    oInit.Init = function () {
+			        //初始化页面上面的按钮事件
+			    };
+			
+			    return oInit;
+			};
+			function datas(){
+				var $table = $("#ArbetTable");
+				var idata = data.geography;
+				for (var i=0;i<idata.length;i++) {
+					$table.append('<tr>'+
+									'<td>'+idata[i].id+'</td>'+
+									'<td>'+idata[i].id+'</td>'+
+									'<td>'+idata[i].type+'</td>'+
+									'<td>'+idata[i].model+'</td>'+
+									'<td>'+idata[i].administtrator+'</td>'+
+									'<td>'+idata[i].statue+'</td>'+
+									'<td>'+'<a href="#" class="delete" onclick="delUser(this)">'+"解除"+'</a>'+'</td>'+
+								'</tr>')
+				}
+			}
+			function delUser(dom) {
+			   
+			    var mymessage = confirm("确认删除嘛？");
+			    if (mymessage == true) {
+			    	var id = $(dom).parent().parent().attr("data-index");
+			    	var idata = data.type;
+			    	idata.splice(id,1);
+			    	//console.log(idata);
+			    	/*datas();
+			    	var oTable = new TableInit();
+			    	oTable.Init();
+			    	oTable.News();
+			    	//console.log(id);*/
+			        $(dom).parent().parent().hide();  
+			    }
+			}
+		</script>
+	</body>
+</html>

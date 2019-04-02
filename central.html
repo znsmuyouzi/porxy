@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			html{
+				 overflow-x: hidden;overflow-y: auto;
+				 background: rgba(252, 250, 251, 1);
+			}
+			#central
+			{
+				width: 100%;
+				background: rgba(252, 250, 251, 1);
+			}
+			.statistics{
+				width: 96%;
+				margin: 30px auto;
+				height: 120px;
+				background-color: rgba(255, 255, 255, 1);
+				border-style: solid;
+			    border-color: rgba(242, 242, 242, 1);
+			    border-radius: 10px;
+			    -moz-box-shadow: 0px 0px 15px rgba(174, 174, 174, 0.349019607843137);
+			    -webkit-box-shadow: 0px 0px 15px rgba(174, 174, 174, 0.349019607843137);
+			    box-shadow: 0px 0px 15px rgba(174, 174, 174, 0.349019607843137);
+			    padding: 0 0;
+			    box-sizing:border-box ;
+			}
+			li{
+				list-style: none;
+			}
+			.statistics ul li{
+				height: 70px;
+				margin: auto 0;
+				border-right: 1px solid #C0C0C0;
+				margin-top: 22px;
+				text-align: center;	
+			}
+			.statistics ul li:nth-child(3){
+				border: none;
+			}
+			.statistics ul li img{
+				margin-right: 20px;
+			}
+			.statistics ul li span{
+				font-size: 18px;
+				font-family: '思源黑体 CN Medium', '思源黑体 CN';
+			    font-weight: 500;
+			    font-style: normal;
+			    color: #1E1E1E;
+			}
+			.statistics ul li span b{
+			    font-weight: 700;
+			    margin-right: 10px;
+			}
+			.echarts{
+				width: 96%;
+				height: 650px;
+				margin: 0 auto;
+				box-sizing:border-box;
+				position: relative;
+			}
+			.echarts .starts{
+				width: 29%;
+				height: 620px;
+				display:inline-block;
+				background-color: rgba(255, 255, 255, 1);
+				border:1px solid rgba(242, 242, 242, 1);
+			    border-radius: 10px;
+			    -moz-box-shadow: 0px 0px 15px rgba(174, 174, 174, 0.349019607843137);
+			    -webkit-box-shadow: 0px 0px 15px rgba(174, 174, 174, 0.349019607843137);
+			    box-shadow: 0px 0px 15px rgba(174, 174, 174, 0.349019607843137);
+			    position: absolute;
+			    top: 0;
+			}
+			.echarts .starts .text{
+				border-radius: 10px 10px 0 0;
+				display: block;
+				width: 100%;
+				height: 45px;
+				font-size: 18px;
+				font-family: '思源黑体 CN Medium', '思源黑体 CN';
+			    font-weight: 700;
+			    font-style: normal;
+			    color: #1E1E1E;
+			    background:rgba(228, 228, 228, 1) url(images/statistics/u29402.png) no-repeat;
+			    line-height: 45px;
+			    text-indent: 20px;
+			}
+			.point{
+				width: 100%;
+				margin: -30px 17%;
+			}
+			.online-offline .online{
+				width: 50%;
+				float: left;
+			}
+			.online-offline .offline{
+				width: 50%;
+				float: right;
+			}
+			.online-offline img{
+				margin-right: 20px;
+				float: left;
+				margin-top: 3px;
+			}
+			.online-offline span{
+				line-height: 20px;
+			}
+			.progress_item{
+				width: 100%;
+				height: 70px;
+				background: rgba(153, 153, 255, 0.0470588235294118);
+			}
+			.progress_item>span{
+				text-indent: 30px;
+				font-family: '思源黑体 CN Light', '思源黑体 CN';
+			    font-weight: 300;
+			    color: #515151;
+			    width: 100%;
+			    height: 20px;
+			    line-height: 20px;
+			    margin-left: 6%;
+			}
+			.progress_item span e{
+				margin-left: 3%;
+			}
+			.progress_item .item{
+				width: 88%;
+				height: 20px;
+				margin: auto;
+				margin-top: 15px;
+			}
+			.progress_item .item .bar{
+				width: 80%;
+				height: 16px;
+				background: rgba(76, 161, 255, 0.0980392156862745);
+				border-radius: 10px;
+				float: left;
+			}
+			.progress_item .item .bar .bar-active{
+				width: 72.5%;
+				height: 16px;
+				background: rgba(0, 153, 255, 1);
+				border-radius: 10px;
+			}
+			.progress_item .item span{
+				float: right;
+			}
+			.point-run{
+				width: 100%;
+				margin: -30px 6%;
+			}
+			.point-run .run,.point-run .standby,.point-run .unknown,.point-run .abnormal{
+				width: 25%;
+				float: left;
+			}
+			.point-run img{
+				margin-right: 15px;
+				float: left;
+				margin-top: 3px;
+			}
+			.ech-conter .progress_item{
+				height: 55px; 
+				padding-top: 10px;
+			}
+			.ech-conter .progress_item .item{
+				margin-top: 10px;
+			}
+			.echarts .ech-right{
+				width: 40%;
+				right: 0;
+				border: none;
+				box-shadow: none;
+			}
+			.echarts .ech-right .annal{
+				width: 100%;
+				height: 300px;
+				background-color: rgba(255, 255, 255, 1);
+				border:1px solid rgba(242, 242, 242, 1);
+			    border-radius: 10px;
+			    -moz-box-shadow: 0px 0px 15px rgba(174, 174, 174, 0.349019607843137);
+			    -webkit-box-shadow: 0px 0px 15px rgba(174, 174, 174, 0.349019607843137);
+			    box-shadow: 0px 0px 15px rgba(174, 174, 174, 0.349019607843137);
+			}
+			#histogram{
+				width: 100%;
+				height: 250px;
+			}
+			.ech-right .annal .bulletin{
+				width: 100%;
+				height: 250px;
+			}
+			.bulletin ul{
+				width: 100%;
+				height: 100%;
+			}
+			.bulletin ul li{
+				width: 92%;
+				height: 50px;
+				margin: 0 auto;
+				border-bottom: 1px dashed #000;
+				position: relative;
+			}
+			.bulletin ul li .bull_left{
+				float: left;
+				height: 50px;
+				cursor: pointer;
+			}
+			.bulletin ul li .bull_righr{
+				float: right;
+				height: 50px;
+			}
+			.bulletin ul li span{
+				font-family: '思源黑体 CN Light', '思源黑体 CN';
+			    font-weight: 300;
+			    color: #515151;
+			    font-size: 16px;
+			    line-height: 50px;
+			}
+			.bulletin ul li .hides{
+				background: rgba(188, 188, 188, 1);
+				position: absolute;
+				top: 30px;
+				left: 35%;
+				border-radius: 10px;
+				z-index: 100;
+				display: none;
+			}
+			.bulletin ul li .hides i{
+			    position: absolute;
+			    top: -15px;
+			    left: 30%;
+				border-top: 8px solid transparent;
+			    border-left: 8px solid transparent;
+			    border-right: 8px solid transparent;
+			    border-bottom: 8px solid rgba(188, 188, 188, 1);
+			}
+			.bulletin ul li .hides i.bot{
+				top: 80px;
+				border-top: 8px solid rgba(188, 188, 188, 1);
+			    border-left: 8px solid transparent;
+			    border-right: 8px solid transparent;
+			    border-bottom: 8px solid transparent;
+			}
+			.bulletin ul li .hides span{
+				display: block;
+				font-family: '思源黑体 CN Light', '思源黑体 CN';
+				font-size: 14px;
+				line-height: 15px;
+				margin: 5px 8px;
+				cursor: pointer;
+			}
+			.bulletin ul li .hides span:hover{
+				color: red;
+			}
+		</style>
+	</head>
+	<body style="min-width: 1280px;">
+		<div id="central">
+			<div class="statistics container">
+				<ul>
+					<li class="col-sm-4 col-md-4 col-lg-4">
+						<img src="images/statistics/count1.png"/>
+						<span>设备总数: <b>1000</b>台</span>
+					</li>
+					<li class="col-sm-4 col-md-4 col-lg-4">
+						<img src="images/statistics/count2.png"/>
+						<span>设备类型： <b>100</b>种</span>
+					</li>
+					<li class="col-sm-4 col-md-4 col-lg-4">
+						<img src="images/statistics/count3.png"/>
+						<span>设备模型: <b>5</b>种</span>
+					</li>
+				</ul>
+			</div>
+			<div class="echarts">
+				<div class="ech-left starts" style="left:0;">
+					<div class="text">设备状态</div>
+					<div id="left-echarts" style="height: 320px;"></div>
+					<div class="online-offline point">
+						<div class="online">
+							<img src="images/statistics/u30063.png"/>
+							<span>在线</span>
+						</div>
+						<div class="offline">
+							<img src="images/statistics/u30068.png"/>
+							<span>离线</span>
+						</div>
+					</div>
+					<div class="progress_item" style="margin-top: 50px; padding-top: 45px; ">
+						<span>在线设备：<e>72.5</e>%</span>
+						<div class="item">
+							<div class="bar">
+								<div class="bar-active"></div>
+							</div>
+							<span>145台</span>
+						</div>
+					</div>
+					<div class="progress_item" style="padding-bottom: 100px; padding-top: 65px;">
+						<span>离线设备：<e>27.5</e>%</span>
+						<div class="item">
+							<div class="bar">
+								<div class="bar-active" style="width: 27.5%; background: rgba(188, 188, 188, 1);"></div>
+							</div>
+							<span>55台</span>
+						</div>	
+					</div>
+				</div>
+				<div class="ech-conter starts" style="left:30%">
+					<div class="text">在线状态</div>
+					<div id="conter-echarts" style="height: 320px;"></div>
+					<div class="point-run">
+						<div class="run">
+							<img src="images/statistics/u30089.png"/>
+							<span>运行</span>
+						</div>
+						<div class="standby">
+							<img src="images/statistics/u30126.png"/>
+							<span>待机</span>
+						</div>
+						<div class="unknown">
+							<img src="images/statistics/u30094.png"/>
+							<span>异常</span>
+						</div>
+						<div class="abnormal">
+							<img src="images/statistics/u30131.png"/>
+							<span>未知</span>
+						</div>
+					</div>
+					<div class="progress_item" style="margin-top: 50px;">
+						<span>运行设备：<e>70</e>%</span>
+						<div class="item">
+							<div class="bar">
+								<div class="bar-active" style="width:70%; background: rgba(0, 204, 102, 1);"></div>
+							</div>
+							<span>100台</span>
+						</div>
+					</div>
+					<div class="progress_item" >
+						<span>待机设备：<e>15</e>%</span>
+						<div class="item">
+							<div class="bar">
+								<div class="bar-active" style="width:15%; background: rgba(255, 205, 47, 1);"></div>
+							</div>
+							<span>25台</span>
+						</div>
+					</div>
+					<div class="progress_item">
+						<span>异常设备：<e>10</e>%</span>
+						<div class="item">
+							<div class="bar">
+								<div class="bar-active" style="width:10%; background:rgba(255, 0, 0, 1);"></div>
+							</div>
+							<span>15台</span>
+						</div>
+					</div>
+					<div class="progress_item" style="padding-bottom: 60px;">
+						<span>未知设备：<e>5</e>%</span>
+						<div class="item">
+							<div class="bar">
+								<div class="bar-active" style="width:5%; background:rgba(109, 184, 249, 1);"></div>
+							</div>
+							<span>5台</span>
+						</div>	
+					</div>
+				</div>
+				<div class="ech-right starts">
+					<div class="annal" style="margin-bottom:20px;">
+						<div class="text">归类统计</div>
+						<div id="histogram"></div>
+					</div>
+					<div class="annal">
+						<div class="text">异常公告</div>
+						<div class="bulletin">
+							<ul>
+								<li>
+									<div class="bull_left">
+										<span style="margin-right: 30px;">【<e>数据异常</e>】</span>
+										<span>XX设备数据中断</span>
+									</div>
+									<div class="bull_righr">
+										<span>2018-08-09</span>
+										<span style="margin-left: 30px;">19:18:43</span>
+									</div>
+									<div class="hides">
+										<i></i>
+										<span>XXX设备异常</span>
+										<span>设备管理员：<e>王二麻子</e></span>
+										<span>异常详情：<e>该云主机需要升级，因此禁用一段时间XXXXXXXXX</e>X</span>
+									</div>
+								</li>
+								<li>
+									<div class="bull_left">
+										<span style="margin-right: 30px;">【<e>数据异常</e>】</span>
+										<span>XX设备数据中断</span>
+									</div>
+									<div class="bull_righr">
+										<span>2018-08-09</span>
+										<span style="margin-left: 30px;">19:18:43</span>
+									</div>
+									<div class="hides">
+										<i></i>
+										<span>XXX设备异常</span>
+										<span>设备管理员：<e>王二麻子</e></span>
+										<span>异常详情：<e>该云主机需要升级，因此禁用一段时间XXXXXXXXX</e>X</span>
+									</div>
+								</li>
+								<li>
+									<div class="bull_left">
+										<span style="margin-right: 30px;">【<e>数据异常</e>】</span>
+										<span>XX设备数据中断</span>
+									</div>
+									<div class="bull_righr">
+										<span>2018-08-09</span>
+										<span style="margin-left: 30px;">19:18:43</span>
+									</div>
+									<div class="hides">
+										<i></i>
+										<span>XXX设备异常</span>
+										<span>设备管理员：<e>王二麻子</e></span>
+										<span>异常详情：<e>该云主机需要升级，因此禁用一段时间XXXXXXXXX</e>X</span>
+									</div>
+								</li>
+								<li>
+									<div class="bull_left">
+										<span style="margin-right: 30px;">【<e>数据异常</e>】</span>
+										<span>XX设备数据中断</span>
+									</div>
+									<div class="bull_righr">
+										<span>2018-08-09</span>
+										<span style="margin-left: 30px;">19:18:43</span>
+									</div>
+									<div class="hides">
+										<i></i>
+										<span>XXX设备异常</span>
+										<span>设备管理员：<e>王二麻子</e></span>
+										<span>异常详情：<e>该云主机需要升级，因此禁用一段时间XXXXXXXXX</e>X</span>
+									</div>
+								</li>
+								<li style="border: none;">
+									<div class="bull_left">
+										<span style="margin-right: 30px;">【<e>数据异常</e>】</span>
+										<span>XX设备数据中断</span>
+									</div>
+									<div class="bull_righr">
+										<span>2018-08-09</span>
+										<span style="margin-left: 30px;">19:18:43</span>
+									</div>
+									<div class="hides" style="top: -70px;">
+										<i class="bot"></i>
+										<span>XXX设备异常</span>
+										<span>设备管理员：<e>王二麻子</e></span>
+										<span>异常详情：<e>该云主机需要升级，因此禁用一段时间XXXXXXXXX</e>X</span>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="js/jquery-1.12.1.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/echarts.common.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			function auto(){
+				var ech_left = echarts.init(document.getElementById('left-echarts'));
+				var ech_con = echarts.init(document.getElementById('conter-echarts'));
+				var ech_r_t = echarts.init(document.getElementById('histogram'));
+				option1 = {
+					color:['rgba(0, 153, 255, 1)','rgba(188, 188, 188, 1)'],
+				    series: [
+				        {
+				            name:'设备状态',
+				            type:'pie',
+				            radius: ['60%', '70%'],
+				            startAngle:130,
+				            avoidLabelOverlap: false,
+				            label: {
+				                normal: {
+				                    show: false,
+				                    position: 'center'
+				                },
+				                emphasis: {
+				                    show: true,
+				                    textStyle: {
+				                        fontSize: '30',
+				                        fontWeight: 'bold'
+				                    }
+				                }
+				            },
+				            labelLine: {
+				                normal: {
+				                    show: false
+				                }
+				            },
+				            data:[
+				                {value:145, name:'在线设备'},
+				                {value:55, name:'离线设备'},
+				            ]
+				        }
+				    ]
+				};
+				option2 = {
+					color:['rgba(0, 204, 102, 1)','rgba(255, 205, 47, 1)','rgba(255, 0, 0, 1)','rgba(109, 184, 249, 1)'],
+				    series: [
+				        {
+				            name:'设备状态',
+				            type:'pie',
+				            radius: ['60%', '70%'],
+				            startAngle:170,
+				            avoidLabelOverlap: false,
+				            label: {
+				                normal: {
+				                    show: false,
+				                    position: 'center'
+				                },
+				                emphasis: {
+				                    show: true,
+				                    textStyle: {
+				                        fontSize: '30',
+				                        fontWeight: 'bold'
+				                    }
+				                }
+				            },
+				            labelLine: {
+				                normal: {
+				                    show: false
+				                }
+				            },
+				            data:[
+				                {value:100, name:'运行设备'},
+				                {value:25, name:'待机设备'},
+				                {value:15, name:'异常设备'},
+				                {value:5, name:'未知设备'},
+				            ]
+				        }
+				    ]
+				};
+				option3 = {
+				    color: ['#3398DB'],
+				    tooltip : {
+				       
+				        
+				    },
+				    grid: {
+				        left: '3%',
+				        right: '4%',
+				        bottom: '10%',
+				        containLabel: true
+				    },
+				    xAxis : [
+				        {
+				            type : 'category',
+				            data : ['传感器类', '自动化设备类', '包装设备类', 'SMT设备类', '仪器仪表类', '测试设备类', '机床设备类', '终端设备类', '环境设备类', '运输设备类'],
+				            axisTick: {
+				                alignWithLabel: true
+				            },
+				            axisLabel:{ 
+        				          show:true,
+        				          interval:"auto",
+        				           inside:false, 
+        				           rotate:-40,
+        				            margin:8
+				                }
+				        }
+				    ],
+				    yAxis : [
+				        {
+				            type : 'value'
+				        }
+				    ],
+				    series : [
+				        {
+				            name:'设备数量',
+				            type:'bar',
+				            barWidth: '30%',
+				            data:[770, 420, 770, 800, 610, 590, 220,650,380,350],
+				            itemStyle: {
+			                    normal: {
+			　
+			                        color: function(params) {
+			                            // build a color map as your need.
+			                            var colorList = [
+			                              'rgba(109, 184, 249, 1)','rgba(82, 122, 241, 1)','rgba(109, 184, 249, 1)','rgba(82, 122, 241, 1)','rgba(109, 184, 249, 1)',
+			                               'rgba(82, 122, 241, 1)','rgba(109, 184, 249, 1)','rgba(82, 122, 241, 1)','rgba(109, 184, 249, 1)','rgba(82, 122, 241, 1)',
+			                            ];
+			                            return colorList[params.dataIndex]
+			                        }
+			                    }
+               				}
+				        }
+				    ]
+				};
+				ech_left.setOption(option1);
+				ech_con.setOption(option2);
+				ech_r_t.setOption(option3);
+			}
+			auto();
+			annal();
+			
+			function annal(){
+				var $bull_left = $(".annal .bull_left");
+				var $list = $(".annal ul li")
+				$bull_left.hover(function(){
+					$(this).find("span").css("color","rgb(255,51,0)");
+				},function(){
+					$(this).find("span").css("color","#515151");
+				});
+				
+				$bull_left.click(function(){
+					$(this).parent().find(".hides").css("display","block");
+				});
+				
+				$list.hover(function(){
+				},function(){
+					$(this).find(".hides").css("display","none");
+				});
+				
+			}
+			
+			$(window).resize(function(){
+				var _width = $("#left-echarts").width();
+				var width1 = $("#histogram").width();
+				$("canvas").css("width",_width)
+				$(".annal canvas").css("width",width1)
+				auto();	
+			})
+		</script>
+	</body>
+</html>

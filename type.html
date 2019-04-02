@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap-table.min.css"/>
+		<style type="text/css">
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			html{
+				 overflow-x: hidden;overflow-y: auto;
+				 background: rgba(252, 250, 251, 1);
+			}
+			body{
+				 background: rgba(252, 250, 251, 1);
+			}
+			#type{
+				width: 98%;
+				height: 720px;
+				background: #fff;
+				margin: 20px auto;
+			}
+			.bootstrap-table{
+				width: 98%;
+    			margin: 0 auto;
+			}
+			.bootstrap-table tr{
+				height: 45px;
+			}
+			.fixed-table-toolbar .new{
+				width: 90px;
+				height: 32px;
+				background: rgba(36, 109, 255, 1);
+				border-radius: 32px;
+			}
+			.fixed-table-toolbar .new span{
+				display: block;
+				width: 100%;
+				height: 100%;
+				font-family: '思源黑体 CN Light', '思源黑体 CN Regular', '思源黑体 CN';
+			    font-weight: 300;
+			    font-style: normal;
+			    font-size: 14px;
+			    color: #FFFFFF;
+			    line-height: 32px;
+			    text-align: center;
+			    cursor: pointer;
+			}
+			#ArbetTable tbody tr{
+				text-indent: 20px;
+			}
+			#ArbetTable tbody tr td{
+				box-sizing: content-box;
+			}
+			#ArbetTable thead.thead-top tr{
+				border: none;
+				background-color: rgba(228, 228, 228, 1);
+				text-indent: 20px;
+			}
+			.pull-left span.page-list{
+				display: none !important;
+			}
+			
+			a.add,a.manage{
+				margin-right: 10px;
+			}
+			a.delete{
+				color: red;
+			}
+			/*.pagination-jump {
+			    margin: 0;
+			}
+			
+			.pagination-jump {
+			    display: inline-block;
+			    padding-left: 1px;
+			    border-radius: 4px;
+			}
+			
+			.pagination-jump>li {
+			    display: inline;
+			}
+			
+			.pagination-jump>li>a, .pagination-jump>li>input, .pagination-jump>li>span {
+			    position: relative;
+			    float: left;
+			    margin-left: -1px;
+			    line-height: 1.42857143;
+			    color: #337ab7;
+			    text-decoration: none;
+			    background-color: #fff;
+			}
+			
+			.pagination-jump>li>a {
+			    padding: 6px 12px;
+			    border: 1px solid #ddd;
+			    border-top-right-radius: 4px;
+			    border-bottom-right-radius: 4px;
+			}
+			
+			.pagination-jump>li>input {
+			    padding: 6px 0px;
+			    border: 1px solid #ddd;
+			    border-top-left-radius: 4px;
+			    border-bottom-left-radius: 4px;
+			    width: 36px;
+			    text-align: center;
+			}
+			
+			.pagination-jump>li>span{
+			    padding: 6px 3px 6px 12px;
+			}
+			
+			
+			.pagination-jump>li>.jump-go {
+			    margin-left: 0;
+			    padding: 6px;
+			    color: #fff;
+			    cursor: default;
+			    background-color: #337ab7;
+			    border-color: #337ab7;
+			}*/
+			#myModal .modal-header{
+				position: relative;
+				    padding: 10px;
+			}
+			#myModal .modal-header i.img{
+				display: block;
+				width: 10px;
+				height: 50px;
+				background:url(images/statistics/u29402.png) no-repeat;
+				position: absolute;
+				top: -2px;
+				left: -2px;
+				border-radius: 5px;
+			}
+			#myModal .modal-header h4{
+				margin-left: 20px;
+			}
+			#name,#password,#sex{
+				width:92%;
+				height:50px;
+				padding-top:10px;
+				margin: 0 auto;
+			}
+			.word{
+				width:100px;
+				line-height:50px;
+				text-align:center;
+				margin-left:20px;
+				margin-right: 20px;
+				float:left;
+				font-size:16px;
+				font-weight: 100;
+			}
+			form .version{
+				display: inline-block;
+				line-height: 25px;
+				text-align: center;
+				width: 90px;
+				height: 25px;
+				background: #fff;
+				border: 1px solid rgba(74, 131, 255, 1);
+				border-radius: 40px;
+				font-family: '思源黑体 CN Light', '思源黑体 CN Regular', '思源黑体 CN';
+			    font-weight: 300;
+			    font-style: normal;
+			    font-size: 14px;
+			    color: #4A83FF;
+			    box-shadow: none;
+			    margin-top: 10px;
+			    margin-right: 20px;
+			}
+			form input{
+				width: 300px;
+			    height: 30px;
+			    margin-top: 10px;
+			    font-weight: 400;
+			    font-size: 14px;
+			    text-indent: 10px;
+			}
+			#selects{
+				width: 300px;
+			    height: 30px;
+			    margin-top: 10px;
+			    font-weight: 400;
+			    font-size: 14px;
+			    text-indent: 10px;
+			}
+			#textarea{
+				width: 300px;
+			    height: 50px;
+			    margin-top: 10px;
+			    font-weight: 400;
+			    font-size: 14px;
+			    text-indent: 10px;
+			}
+			.spics .add{
+				position:relative;
+				margin:20px 10px;
+				display:block;
+				text-align:center;
+				width:60px;
+				height:40px;
+				float:right;
+				border-radius:5px;
+				font-size:16px;
+				cursor: pointer;
+				border:1px solid #000;
+				line-height:40px;
+			}
+			.spics .add input{
+				position:absolute;
+				top:0;
+				left:0;
+				width:100%;
+				height:100%;
+				opacity:0;
+			}
+			.spics #hide{
+				display:block;
+				width:60px;
+				height:40px;
+				float:right;
+				text-align:center;
+				font-size:16px;
+				border-radius:5px;
+				background:#d6d6d6;
+				margin:5px 0px;
+				cursor: pointer;
+				line-height:40px;
+			}
+
+			#pic img{
+				font-size:16px;
+				display:block;
+				width:50px;
+				height:50px;
+				border-radius:50px;
+				margin:15px;
+				float:left;
+			}
+		</style>
+	</head>
+	<body style="min-width: 1280px;">
+		<div id="type">
+			<table class="table table-striped table-hover" id="ArbetTable">
+			</table>
+		</div>
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content clearfix">
+		      <div class="modal-header clearfix">
+		      	<i class="img"></i>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">新建设备类型</h4>
+		      </div>
+		      <div class="modal-body clearfix" style="height: 500px;">
+		        	<form action="#" method="get" enctype="multipart/form-data">
+						<div id="name">
+							<div class="word">注册版本：</div>
+							<span class="version basis">加强版</span> 
+							<span class="version basis">基础版</span> 
+						</div>
+						<div id="name">
+							<label>
+								<div class="word">设备类型：</div>
+								<input type="password" name="word_name" value="" required="required" placeholder="请输入设备类型" title="内容不能为空"/>
+								<div class="p"></div>
+							</label>
+						</div>
+						<div id="sex">
+							<div class="word">节点类型：</div>
+							<label>
+								<input type="radio" name="sex" value="代理服务器" checked style="width:15px;height:15px;line-height:20px;margin:15px 0px;float: left;"/>
+								<div style="margin-left:10px;padding-top:11px;float:left; margin-right: 5px">代理服务器</div>
+							</label>
+							<label>
+								<input type="radio" name="sex" value="网关" style="width:15px;height:15px;line-height:20px;margin:15px 3px; float: left;"/>
+								<div style="margin-left:10px;padding-top:11px;float:left; margin-right: 5px">网关</div>
+							</label>
+							<label>
+								<input type="radio" name="sex" value="直连设备" style="width:15px;height:15px;line-height:20px;margin:15px 3px;float: left;"/>
+								<div style="margin-left:10px;padding-top:11px;float:left; margin-right: 5px">直连设备</div>
+							</label>
+							<label>
+								<input type="radio" name="sex" value="间连设备" style="width:15px;height:15px;line-height:20px;margin:15px 3px;float: left;"/>
+								<div style="margin-left:10px;padding-top:11px;float:left; margin-right: 5px">间连设备</div>
+							</label>
+						</div>
+						<div id="name">
+								<div class="word">所属类别：</div>
+								<select id="selects">
+					                <option value="传感器类">传感器类</option>
+					                <option value="网关类">网关类</option>
+					                <option value="自动化设备类">自动化设备类</option>
+					                <option value="SMT设备类">SMT设备类</option>
+					                <option value="仪器仪表类">仪器仪表类</option>
+					                <option value="测试设备类">测试设备类</option>
+					                <option value="机床设备类">机床设备类</option>
+					                <option value="终端设备类">终端设备类</option>
+					                <option value="环境设备类">环境设备类</option>
+					                <option value="运输设备类">运输设备类</option>
+					                <option value="压铸设备类">压铸设备类</option>
+					                <option value="注塑成型设备类">注塑成型设备类</option>
+					                <option value="冲压设备类">冲压设备类</option>
+					                <option value="包装设备类">包装设备类</option>
+					                <option value="表面处理设备类">表面处理设备类</option>
+					                <option value="其他类">其他类</option>
+					             </select>
+						</div>
+						<div id="name">
+							<label>
+								<div class="word">厂商名称：</div>
+								<input type="text" name="name1" value="" required="required" placeholder="内容不能为空" title="内容不能为空"/>
+								<div class="p"></div>
+							</label>
+						</div>
+						<div id="name" style="height: 70px;">
+							<label>
+								<div class="word">类型描述：</div>
+								<textarea id="textarea" placeholder="请输入该设备类型的具体描述相关信息"></textarea>
+								<div class="p"></div>
+							</label>
+						</div>
+						<div id="name" class="spics" style="height: 115px;">
+								<div class="word">类型图片：</div>
+								<div class="add">添加
+										<input type="file" accept="audio/*,video/*,image/*" id="addFile" onchange="add_pic()">
+										<div id="hide">删除</div>
+								</div>
+								
+								<span id="sum" class="sum">添加0张图片</span>
+								<div contenteditable="false" style="height: 90px; width: 300px; border: 1px solid #122B40; float: left;" id="pic"></div>
+								<div class="p"></div>
+						</div>
+					</form>
+		      </div>
+		      <div class="modal-footer clearfix">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+		        <button type="button" class="btn btn-primary">确认</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		
+		<script src="js/jquery-1.12.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/bootstrap-table.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/locale/bootstrap-table-zh-CN.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/data.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			datas();
+			$(function () {
+    			//1.初始化Table
+			    var oTable = new TableInit();
+			    oTable.Init();
+			    oTable.News();
+			    //2.初始化Button的点击事件
+			    var oButtonInit = new ButtonInit();
+			    oButtonInit.Init();
+			});
+			var TableInit = function () {
+			    var oTableInit = new Object();
+			    //初始化Table
+			    oTableInit.Init = function () {
+			        $('#ArbetTable').bootstrapTable({
+			            //url: '/Interface/GetData',         //请求后台的URL（*）
+			            //method: 'get',                      //请求方式（*）
+			            toolbar: '#toolbar',                //工具按钮用哪个容器
+			            //striped: true,                      //是否显示行间隔色
+			            cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+			            pagination: true,                   //是否显示分页（*）
+			           	paginationShowPageGo: true,			//跳转
+			            sortable: false,                     //是否启用排序
+			            sortOrder: "asc",                   //排序方式
+			            //queryParams: oTableInit.queryParams,//传递参数（*）
+			            sidePagination: "client",           //分页方式：client客户端分页，server服务端分页（*）
+			            pageNumber: 1,                       //初始化加载第一页，默认第一页
+			           	pageSize: 4,                       //每页的记录行数（*）
+			           // pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
+			            search: true,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+			            //contentType: "application/x-www-form-urlencoded", 
+			            //strictSearch: true,
+			            //showColumns: true,                  //是否显示所有的列 标题的取消
+			           // showRefresh: true,                  //是否显示刷新按钮
+			            minimumCountColumns: 2,             //最少允许的列数
+			            clickToSelect: true,                //是否启用点击选中行
+			            //height: 700,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+			            uniqueId: "no",                     //每一行的唯一标识，一般为主键列
+			           	//showToggle: true,                    //是否显示详细视图和列表视图的切换按钮
+			            //cardView: false,                    //是否显示详细视图
+			            //detailView: false,                   //是否显示父子表
+			            columns: [
+			            {
+			                field: 'ID',
+			                title: '设备类型'
+
+			            }, {
+			                field: 'register',
+			                title: '注册版本'
+			            }, {
+			                field: 'subordinate',
+			                title: '所属类别'
+			            },
+			            {
+			                field: 'node',
+			                title: '节点类型'
+			            },
+			            {
+			                field: 'firm_name',
+			                title: '厂商名称'
+			            },
+			            {
+			                field: 'Model',
+			                title: '厂商型号'
+			            },
+			            {
+			                field: 'describe',
+			                title: '类型描述'
+			            },
+			            {
+			                field: 'operate',
+			                title: '操作',
+			                //formatter: operateFormatter2 //自定义方法，添加操作按钮
+			            },
+			            ],
+			        });
+
+			    };
+				//新建类型
+				oTableInit.News = function (){
+					var $pull_left = $(".fixed-table-toolbar .pull-left");
+					var $new_built = $('<div class="new">'+
+												'<span data-toggle="modal" data-target="#myModal">'+"新建类型"+'</span>'+
+										'</div>');
+					
+					$pull_left.append($new_built);
+				}
+
+			    //得到查询的参数
+			    oTableInit.queryParams = function (params) {
+			        var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+			            limit: params.limit,   //页面大小
+			            offset:params.offset,
+			        };
+			        return temp;
+			    };
+			    return oTableInit;
+			};
+			 
+			$(function(){
+				$thead = $("#ArbetTable thead").addClass("thead-top");
+			})
+					/*function operateFormatter2() {//赋予的参数
+					    return [
+					        '<a class="edit" href="#">编辑</a>',
+					        '<a class="delete" href="#">删除</a>',
+					    ].join('');
+					}*/
+			var ButtonInit = function () {
+			    var oInit = new Object();
+			    var postdata = {};
+			
+			    oInit.Init = function () {
+			        //初始化页面上面的按钮事件
+			    };
+			
+			    return oInit;
+			};
+			
+			function datas(){
+				var $table = $("#ArbetTable");
+				var idata = data.type;
+				for (var i=0;i<idata.length;i++) {
+					$table.append('<tr>'+
+									'<td>'+idata[i].id+'</td>'+
+									'<td>'+idata[i].register+'</td>'+
+									'<td>'+idata[i].subordinate+'</td>'+
+									'<td>'+idata[i].nodes+'</td>'+
+									'<td>'+idata[i].firm_name+'</td>'+
+									'<td>'+idata[i].model+'</td>'+
+									'<td>'+idata[i].describe+'</td>'+
+									'<td>'+'<a href="#" class="add">'+"添加设备"+'</a>'+
+									'<a href="#" class="manage">'+"管理"+'</a>'+
+									'<a href="#" class="delete" onclick="delUser(this)">'+"删除"+'</a>'+'</td>'+
+								'</tr>')
+				}
+			}
+			$(function(){
+				var pic = document.getElementById('pic');
+				var hide = document.getElementById('hide');
+				var rum = document.getElementById("sum");
+				var img;
+		
+				pic.ondragenter = function(){//进入目标元素触发
+				}
+				pic.ondragover = function(ev){//在目标元素上连续触发
+					var ev = ev||window.event;
+					ev.preventDefault();//阻止默认事件
+				}
+				pic.ondragleave = function(){//离开目标元素
+				}
+				pic.ondrop = function(ev){//在目标元素上面释放鼠标触发
+					add_pic();
+					function add_pic(ev){
+						var ev = ev||window.event;
+						ev.preventDefault();//阻止默认事件
+						var file = ev.dataTransfer.files;
+						for (var i=0; i<file.length ;i++ )
+						{
+							if (file[i].type.indexOf("image")!=-1)
+							{
+								var read = new FileReader();//新建一个读取文件对象
+								read.readAsDataURL(file[i]);//读取文件
+								read.onload = function(){//读取文件成功之后调用什么函数
+									img = document.createElement("img");
+									//alert(this.result);
+									img.src = this.result;
+									pic.appendChild(img);
+									//获取img节点 实现删除功能
+									var oImg = document.getElementsByTagName("img");
+									if (oImg)
+									{
+										for (var j=0;j<oImg.length ;j++ )
+										{
+											oImg[j].ondragstart = function(ev){
+												ev.dataTransfer.setData("data",ev.target.innerHTML);
+												img = ev.target;
+											}
+											oImg[j].ondragend = function(ev){
+												ev.dataTransfer.clearData("data");//清楚数据
+												img = null;
+											}
+										}
+										var n = oImg.length;
+										//console.log(n);
+										//$('.sum').html('添加'+n+'张图片');
+										//sum.innerHTML = '添加'+n+'张图片';
+										rum.innerHTML = "添加"+n+"张图片";
+										//console.log(sum);
+									}
+									
+								}
+							}else{
+								alert("请上传图片！");
+							}
+							
+						}
+					}
+				}
+				//实现删除功能(移除img节点)
+				hide.onclick = function(){
+					if (img)
+					{
+						pic.innerHTML = '';
+						var span = document.createElement("span");
+						pic.appendChild(span);
+						rum.innerHTML = "添加0张图片";
+					}else{
+						alert("没有图片！");
+					}
+				}
+
+			})    // 删除用户
+			function delUser(dom) {
+			   
+			    var mymessage = confirm("确认删除嘛？");
+			    if (mymessage == true) {
+			    	var id = $(dom).parent().parent().attr("data-index");
+			    	var idata = data.type;
+			    	idata.splice(id,1);
+			    	//console.log(idata);
+			    	/*datas();
+			    	var oTable = new TableInit();
+			    	oTable.Init();
+			    	oTable.News();
+			    	//console.log(id);*/
+			        $(dom).parent().parent().hide();  
+			    }
+			}
+		</script>
+	</body>
+</html>
